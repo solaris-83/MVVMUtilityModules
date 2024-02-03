@@ -1,7 +1,6 @@
 ﻿
-
-using CommunityToolkit.Mvvm.Input;
 using MVVMDialogsModule.Views.Models;
+using System.Windows.Input;
 
 namespace MVVMDialogsModule.Views.Interfaces
 {
@@ -15,12 +14,12 @@ namespace MVVMDialogsModule.Views.Interfaces
         /// <summary>
         /// Method called when OK button is pressed
         /// </summary>
-        IRelayCommand OkCommand { get; }
+        ICommand OkCommand { get; }
 
         /// <summary>
         /// Method called when Cancel button is pressed
         /// </summary>
-        IRelayCommand CancelCommand { get; }
+        ICommand CancelCommand { get; }
 
         /// <summary>
         /// Called when the Dialog has been shown.

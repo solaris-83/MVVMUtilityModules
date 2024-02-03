@@ -134,7 +134,7 @@ namespace MVVMDialogsModule.Views.Services
         }
 
         /// <inheritdoc />
-        public TReturn? GetReturnParameters<TReturn>()
+        public TReturn GetReturnParameters<TReturn>()
         {
             try { return (TReturn)ReturnParameters; }
             catch { return default; }
