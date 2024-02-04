@@ -1,8 +1,4 @@
 ﻿<Window x:Class="MVVMDialogsModule.Views.Windows.DialogWindowShell"
          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         WindowStyle="SingleBorderWindow"
-         ResizeMode="NoResize"
-         WindowStartupLocation="CenterOwner"
-         UseLayoutRounding="True"
-         SizeToContent="WidthAndHeight"/>
+         UseLayoutRounding="True"/>

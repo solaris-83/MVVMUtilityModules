@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MVVMDialogsModule.Interfaces;
 using System.Windows;
 
 namespace MVVMDialogsModule.Views.Windows
@@ -10,9 +8,14 @@ namespace MVVMDialogsModule.Views.Windows
     /// </summary>
     public partial class DialogWindowShell : Window
     {
-        public DialogWindowShell()
+        public DialogWindowShell(IWindowSupport window)
         {
             InitializeComponent();
+            Owner = window.Owner;
+            WindowStyle = window.Style;
+            ResizeMode = window.ResizeMode;
+            WindowStartupLocation = window.StartLocation;
+            SizeToContent = window.SizeToContent;
         }
     }
 }

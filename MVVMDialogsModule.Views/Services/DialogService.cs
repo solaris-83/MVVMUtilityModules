@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
+using MVVMDialogsModule.Interfaces;
 using MVVMDialogsModule.Views.Interfaces;
 using MVVMDialogsModule.Views.Models;
 using MVVMDialogsModule.Views.Windows;
@@ -14,16 +15,14 @@ namespace MVVMDialogsModule.Views.Services
     {
         #region Private members
         private readonly IServiceProvider _serviceProvider;
-
+        private readonly IWindowSupport _window;
         static Dictionary<Type, Type> _mappings = new Dictionary<Type, Type>();
         static Dictionary<Type, DialogWindowShell> _windowMappings = new Dictionary<Type, DialogWindowShell>();
 
         #endregion
 
         #region Public properties
-        /// <inheritdoc />
-        public static string ViewModelNamespace => $"{Assembly.GetExecutingAssembly().GetName().Name}.ViewModels";
-
+        
         /// <inheritdoc />
         public DefaultDialogSettings Settings { get; private set; } = new DefaultDialogSettings();
 
@@ -37,8 +36,9 @@ namespace MVVMDialogsModule.Views.Services
         /// Constructor
         /// </summary>
         /// <param name="serviceProvider">The provider needed for Dependency Injection</param>
-        public DialogService(IServiceProvider serviceProvider)
+        public DialogService(IServiceProvider serviceProvider, IWindowSupport window)
         {
+            _window = window;
             _serviceProvider = serviceProvider;
         }
 
@@ -58,13 +58,10 @@ namespace MVVMDialogsModule.Views.Services
         public static void AutoRegisterDialogs<T>()
         {
             var type = typeof(T);
-
+            var viewModelNamespace = $"{ Assembly.GetCallingAssembly().GetName().Name}.ViewModels";
             foreach (var exportedType in type.GetTypeInfo().Assembly.DefinedTypes.Where(t => t.GetCustomAttribute<DialogModuleAttribute>() != null))
             {
-                Type vm = Type.GetType($"{ViewModelNamespace}.{exportedType.Name}ViewModel, {exportedType.Assembly.FullName}");
-                if (vm == null)
-                    throw new Exception($"ViewModel not found for {exportedType.Name} at {ViewModelNamespace}. Make sure to place view model classes in the \"ViewModels\" folder.");
-
+                Type vm = Type.GetType($"{viewModelNamespace}.{exportedType.Name}ViewModel, {exportedType.Assembly.FullName}") ?? throw new ArgumentNullException($"ViewModel not found for {exportedType.Name} at {viewModelNamespace}. Make sure to place view model classes in the \"ViewModels\" folder.");
                 if (_mappings.ContainsKey(vm))
                     continue;
 
@@ -189,11 +186,6 @@ namespace MVVMDialogsModule.Views.Services
                 dialog.Width = frameworkElement.Width;
             }
 
-#if DEBUG
-            Console.WriteLine("***** VIEWMODEL PRESENTI");
-            foreach (var window in _windowMappings)
-                Console.WriteLine(window.Key.Name);
-#endif
             _windowMappings.Add(type, dialog);
 
             dialog.ShowDialog();
@@ -211,7 +203,7 @@ namespace MVVMDialogsModule.Views.Services
 
         private DialogWindowShell CreateDialogInternal(Type type)
         {
-            var dialog = new DialogWindowShell();
+            var dialog = new DialogWindowShell(_window);
             var content = ActivatorUtilities.CreateInstance(_serviceProvider, type);
 
             if (content is FrameworkElement viewForName
