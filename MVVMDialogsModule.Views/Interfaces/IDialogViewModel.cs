@@ -9,7 +9,7 @@ namespace MVVMDialogsModule.Views.Interfaces
         /// <summary>
         /// Called when the Dialog has been closing.
         /// </summary>
-        void DialogClosing();
+        void OnDialogClosing();
 
         /// <summary>
         /// Method called when OK button is pressed

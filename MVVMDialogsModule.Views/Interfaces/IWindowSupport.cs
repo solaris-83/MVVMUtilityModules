@@ -2,6 +2,9 @@
 
 namespace MVVMDialogsModule.Interfaces
 {
+    /// <summary>
+    /// General settings for the DialogWindowShell
+    /// </summary>
     public interface IWindowSupport
     {
         public Window Owner { get;  }

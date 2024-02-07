@@ -45,16 +45,12 @@ namespace MVVMDialogsModule.Views.Services
         #endregion
 
         #region Public methods
-        /// <inheritdoc />
-        public static void RegisterDialog<TView, TViewModel>()
-        {
-            if (_mappings.Contains(new KeyValuePair<Type, Type>(typeof(TView), typeof(TViewModel))))
-                return;
 
-            _mappings.Add(typeof(TViewModel), typeof(TView));
-        }
-
-        /// <inheritdoc />
+        /// <summary>
+        /// Register a view via "DialogModule" attribute
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <exception cref="ArgumentNullException"></exception>
         public static void AutoRegisterDialogs<T>()
         {
             var type = typeof(T);
@@ -62,10 +58,7 @@ namespace MVVMDialogsModule.Views.Services
             foreach (var exportedType in type.GetTypeInfo().Assembly.DefinedTypes.Where(t => t.GetCustomAttribute<DialogModuleAttribute>() != null))
             {
                 Type vm = Type.GetType($"{viewModelNamespace}.{exportedType.Name}ViewModel, {exportedType.Assembly.FullName}") ?? throw new ArgumentNullException($"ViewModel not found for {exportedType.Name} at {viewModelNamespace}. Make sure to place view model classes in the \"ViewModels\" folder.");
-                if (_mappings.ContainsKey(vm))
-                    continue;
-
-                _mappings.Add(vm, exportedType);
+                _mappings.TryAdd(vm, exportedType);
             }
         }
 
@@ -131,11 +124,11 @@ namespace MVVMDialogsModule.Views.Services
         }
 
         /// <inheritdoc />
-        public TReturn GetReturnParameters<TReturn>()
-        {
-            try { return (TReturn)ReturnParameters; }
-            catch { return default; }
-        }
+        //public TReturn GetReturnParameters<TReturn>()
+        //{
+        //    try { return (TReturn)ReturnParameters; }
+        //    catch { return default; }
+        //}
 
         /// <inheritdoc />
         public void SetReturnParameters(object returnParameters)
@@ -154,6 +147,7 @@ namespace MVVMDialogsModule.Views.Services
         {
             return Settings;
         }
+
         public bool DialogIsOpen<TViewModel>()
         {
             bool result = false;
@@ -168,7 +162,7 @@ namespace MVVMDialogsModule.Views.Services
 
         #region Private methods
 
-        private void ShowDialogInternal(Type type, DialogParameters dialogParameters)
+        private void ShowDialogInternal(Type type, DialogParameters? dialogParameters)
         {
 
             ReturnParameters = default;
@@ -225,10 +219,10 @@ namespace MVVMDialogsModule.Views.Services
             return dialog;
         }
 
-        private void SetupEventHandlersInternal(DialogWindowShell dialog, FrameworkElement frameworkElement, DialogParameters dialogParameters)
+        private void SetupEventHandlersInternal(DialogWindowShell dialog, FrameworkElement? frameworkElement, DialogParameters? dialogParameters)
         {
-            EventHandler closeEventHandler = null;
-            RoutedEventHandler shownEventHandler = null;
+            EventHandler? closeEventHandler = default;
+            RoutedEventHandler? shownEventHandler = default;
 
             closeEventHandler = (s, e) =>
             {

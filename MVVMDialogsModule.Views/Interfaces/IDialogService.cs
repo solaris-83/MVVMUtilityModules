@@ -55,29 +55,35 @@ namespace MVVMDialogsModule.Views.Interfaces
         void CloseDialog<TViewModel>();
 
         /// <summary>
-        /// Get's the current ReturnParameters
+        /// Get the current ReturnParameters
         /// </summary>
         /// <typeparam name="TReturn">The expected return type</typeparam>
         /// <returns>Returns the ReturnParameters as the requested type</returns>
-        TReturn GetReturnParameters<TReturn>();
+        //TReturn GetReturnParameters<TReturn>();
 
         /// <summary>
-        /// Set's the ReturnParameters
+        /// Set the ReturnParameters
         /// </summary>
         /// <param name="returnParameters">The value of the expected return parameters</param>
         void SetReturnParameters(object returnParameters);
 
         /// <summary>
-        /// Set's the DefaultDialogSettings
+        /// Set the DefaultDialogSettings
         /// </summary>
         /// <param name="dialogSettings">The value of the expected default settings</param>
         void SetDefaultDialogSettings(DefaultDialogSettings dialogSettings);
 
         /// <summary>
-        /// Get's the current Default Dialog Settings
+        /// Get the current Default Dialog Settings
         /// </summary>
         /// <returns>Returns the Default Dialog Settings</returns>
         DefaultDialogSettings GetDefaultDialogSettings();
+
+        /// <summary>
+        /// Check if a dialog associated to the same viewmodel is already open
+        /// </summary>
+        /// <typeparam name="TViewModel">The associated ViewModel to the requested View</typeparam>
+        /// <returns></returns>
         bool DialogIsOpen<TViewModel>();
     }
 }
