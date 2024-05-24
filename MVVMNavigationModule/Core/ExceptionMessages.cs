@@ -1,0 +1,12 @@
+﻿namespace MVVMNavigationModule.Core
+{
+    public static class ExceptionMessages
+    {
+        public const string CanNotRegisterKeyTwice = "Can't register navigation key twice";
+
+        public static string KeyIsNotRegistered(string navigationKey)
+        {
+            return $"Key '{navigationKey}' is not registered for navigation";
+        }
+    }
+}

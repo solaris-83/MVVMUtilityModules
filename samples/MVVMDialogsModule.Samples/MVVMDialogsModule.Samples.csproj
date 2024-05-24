@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MVVMDialogsModule.Views\MVVMDialogsModule.csproj" />
+    <ProjectReference Include="..\..\MVVMDialogsModule\MVVMDialogsModule.csproj" />
   </ItemGroup>
 
 </Project>
