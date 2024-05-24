@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MVVMDialogsModule\MVVMDialogsModule.csproj" />
+    <ProjectReference Include="..\..\MVVMNavigationModule\MvvmNavigationModule.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,6 @@ namespace MVVMDialogsModule.Samples
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = App.ServiceProvider.GetRequiredService<MainViewModel>();
         }
     }
 }
