@@ -7,6 +7,7 @@ using MVVMDialogsModule.Views.Models;
 using MVVMDialogsModule.Views.Windows;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Input;
 
 namespace MVVMDialogsModule.Views.Services
 {
@@ -226,7 +227,7 @@ namespace MVVMDialogsModule.Views.Services
 
             closeEventHandler = (s, e) =>
             {
-                if (frameworkElement?.DataContext is IDialogViewModel dialogAware)
+                if (frameworkElement?.DataContext is IDialogViewModel<ICommand> dialogAware)
                 {
                     dialogAware.OnDialogClosed(dialogParameters);
                 }
@@ -237,7 +238,7 @@ namespace MVVMDialogsModule.Views.Services
 
             shownEventHandler = (s, e) =>
             {
-                if (frameworkElement?.DataContext is IDialogViewModel dialogAware)
+                if (frameworkElement?.DataContext is IDialogViewModel<ICommand> dialogAware)
                 {
                     dialogAware.OnDialogShown(dialogParameters);
                 }

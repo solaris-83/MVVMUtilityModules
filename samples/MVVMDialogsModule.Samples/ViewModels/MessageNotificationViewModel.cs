@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace MVVMDialogsModule.Samples.ViewModels
 {
-    public class MessageNotificationViewModel: IDialogViewModel, INotifyPropertyChanged 
+    public class MessageNotificationViewModel: IDialogViewModel<ICommand>, INotifyPropertyChanged 
     {
         private readonly IDialogService _dialogService;
 
@@ -27,7 +27,7 @@ namespace MVVMDialogsModule.Samples.ViewModels
 
         public void OnDialogClosing()
         {
-           
+
         }
 
         public void OnDialogClosed(DialogParameters dialogParameters)

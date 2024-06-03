@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace MVVMDialogsModule.Views.Interfaces
 {
-    public interface IDialogViewModel
+    public interface IDialogViewModel<T> where T : ICommand
     {
         /// <summary>
         /// Called when the Dialog has been closing.
@@ -14,12 +14,12 @@ namespace MVVMDialogsModule.Views.Interfaces
         /// <summary>
         /// Method called when OK button is pressed
         /// </summary>
-        ICommand OkCommand { get; }
+        T OkCommand { get; }
 
         /// <summary>
         /// Method called when Cancel button is pressed
         /// </summary>
-        ICommand CancelCommand { get; }
+        T CancelCommand { get; }
 
         /// <summary>
         /// Called when the Dialog has been shown.
