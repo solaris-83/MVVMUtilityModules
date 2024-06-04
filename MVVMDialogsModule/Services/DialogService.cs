@@ -227,10 +227,9 @@ namespace MVVMDialogsModule.Views.Services
 
             closeEventHandler = (s, e) =>
             {
-                if (frameworkElement?.DataContext is IDialogViewModel<ICommand> dialogAware)
-                {
-                    dialogAware.OnDialogClosed(dialogParameters);
-                }
+                Type type = frameworkElement?.DataContext.GetType();
+                MethodInfo method = type.GetMethod("OnDialogClosed");
+                method?.Invoke(frameworkElement?.DataContext, [dialogParameters]);
                 dialog.Closed -= closeEventHandler;
             };
 
@@ -238,11 +237,9 @@ namespace MVVMDialogsModule.Views.Services
 
             shownEventHandler = (s, e) =>
             {
-                if (frameworkElement?.DataContext is IDialogViewModel<ICommand> dialogAware)
-                {
-                    dialogAware.OnDialogShown(dialogParameters);
-                }
-
+                Type type = frameworkElement?.DataContext.GetType();
+                MethodInfo method = type.GetMethod("OnDialogShown");
+                method?.Invoke(frameworkElement?.DataContext, [dialogParameters]);
                 dialog.Loaded -= shownEventHandler;
             };
 
