@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVMDialogsModule.Samples",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVMDialogsModule", "MVVMDialogsModule\MVVMDialogsModule.csproj", "{4596BB3A-B129-47B3-A4CB-C3091DBAC07C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiClientModule", "ApiClientModule\ApiClientModule.csproj", "{559672AC-A743-423E-91EC-53850839B864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiClientModule.UnitTests", "ApiClientModule.UnitTests\ApiClientModule.UnitTests.csproj", "{5A904E01-0858-406E-921F-538FBC3C8288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{4596BB3A-B129-47B3-A4CB-C3091DBAC07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4596BB3A-B129-47B3-A4CB-C3091DBAC07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4596BB3A-B129-47B3-A4CB-C3091DBAC07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{559672AC-A743-423E-91EC-53850839B864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{559672AC-A743-423E-91EC-53850839B864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{559672AC-A743-423E-91EC-53850839B864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{559672AC-A743-423E-91EC-53850839B864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A904E01-0858-406E-921F-538FBC3C8288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A904E01-0858-406E-921F-538FBC3C8288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A904E01-0858-406E-921F-538FBC3C8288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A904E01-0858-406E-921F-538FBC3C8288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
