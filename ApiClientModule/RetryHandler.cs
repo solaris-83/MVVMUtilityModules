@@ -48,7 +48,7 @@ namespace ApiClientModule
                     var token = await _tokenProvider.GetTokenAsync();
                     await _tokenProvider.CheckValidityAsync(token);
 
-                    if (!string.IsNullOrEmpty(token.AccessToken))
+                    if (!string.IsNullOrEmpty(token?.AccessToken))
                     {
                         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
                     }
