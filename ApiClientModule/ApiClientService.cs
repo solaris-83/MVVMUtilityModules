@@ -121,7 +121,7 @@ namespace ApiClientModule
                 }
             }
             catch (TaskCanceledException) { return default(TResponse); }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }

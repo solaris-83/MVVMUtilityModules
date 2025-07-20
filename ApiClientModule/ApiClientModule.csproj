@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<PackageId>ApiClientModule</PackageId>
-	<Version>1.1.0</Version>
+	<Version>1.2.0</Version>
 	<Authors>Marco Cigana</Authors>
 	<Company></Company>
 	<Description>A package to simplify the GET and POST invocations</Description>
