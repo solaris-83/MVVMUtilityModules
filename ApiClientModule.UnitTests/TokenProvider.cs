@@ -3,14 +3,11 @@ namespace ApiClientModule.UnitTests
 {
     internal class TokenProvider : ITokenProvider
     {
-        public Task CheckValidityAsync(Token token)
-        {
-            throw new Exception("Validity not passed");
-        }
 
-        public Task<Token> GetTokenAsync()
+        public Task<Token> GetTokenAndCheckValidityAsync(HttpRequestMessage httpRequest)
         {
-            return Task.FromResult(new Token() { AccessToken = "ACD-123", ExpiresIn = 100, ExpiresAt = DateTime.Now.AddMinutes(5) });
+            var t = new Token() { AccessToken = "ACD-123", ExpiresIn = 100, ExpiresAt = DateTime.Now.AddMinutes(5), TokenType = TokenTypeEnum.Bearer, Result = new Result() { IsSuccess = true } };
+            return Task.FromResult(t);
         }
     }
 }

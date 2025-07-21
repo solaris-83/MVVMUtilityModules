@@ -17,13 +17,6 @@ namespace ApiClientModule
         private readonly Func<object, Task<bool>> _retryCondition;
         private readonly ITokenProvider _tokenProvider;
 
-        //public RetryDelegatingHandler(HttpMessageHandler innerHandler, RetryHandlerSettings retryHandlerSettings) : base(innerHandler)
-        //{
-        //    _maxRetries = retryHandlerSettings == null ? 0 : retryHandlerSettings.MaxRetries;
-        //    _delayMsBetweenRetries = retryHandlerSettings == null ? 0 : retryHandlerSettings.DelayMsBetweenRetries;
-        //    _retryCondition = retryHandlerSettings?.RetryCondition;
-        //}
-
         public RetryHandler(ITokenProvider tokenProvider, RetryHandlerSettings retryHandlerSettings)
         {
             _maxRetries = retryHandlerSettings == null ? 0 : retryHandlerSettings.MaxRetries;
@@ -37,7 +30,7 @@ namespace ApiClientModule
             int retries = 0;
             while (true)
             {
-                HttpResponseMessage response = null;
+                HttpResponseMessage? response = null;
                 bool shouldRetry = false;
 
                 try
@@ -45,12 +38,13 @@ namespace ApiClientModule
                     if (_tokenProvider == null)
                         throw new Exception("You need to implement the interface ITokenProvider");
 
-                    var token = await _tokenProvider.GetTokenAsync();
-                    await _tokenProvider.CheckValidityAsync(token);
+                    var outcome = await _tokenProvider.GetTokenAndCheckValidityAsync(request);
+                    if(outcome.Result.IsSuccess == false && !string.IsNullOrEmpty(outcome.Result.ErrorMessage))
+                        throw new Exception(outcome.Result.ErrorMessage);
 
-                    if (!string.IsNullOrEmpty(token?.AccessToken))
+                    if (outcome.Result.IsSuccess && !string.IsNullOrEmpty(outcome.AccessToken))
                     {
-                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", outcome.AccessToken);
                     }
 
                     response = await base.SendAsync(request, cancellationToken);

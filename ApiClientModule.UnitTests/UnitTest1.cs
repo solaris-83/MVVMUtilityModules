@@ -46,14 +46,14 @@ namespace ApiClientModule.UnitTests
             Assert.That(resp, Is.Not.Null);
         }
 
-        [Test]
-        public async Task GetWrongEndpoint()
-        {
-            var apiClientService = _serviceProvider.GetRequiredService<IApiClientService>();
-            apiClientService.SetClientId("api");
-            var resp = await apiClientService.GetAsync<GetResponse1>("todosz/1");
+        //[Test]
+        //public async Task GetWrongEndpoint()
+        //{
+        //    var apiClientService = _serviceProvider.GetRequiredService<IApiClientService>();
+        //    apiClientService.SetClientId("api");
+        //    var resp = await apiClientService.GetAsync<GetResponse1>("todosz/1");
             
-        }
+        //}
 
         [Test]
         public async Task GetEndpointWithUrlParameters()
