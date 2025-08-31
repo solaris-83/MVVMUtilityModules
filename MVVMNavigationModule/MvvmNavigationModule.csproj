@@ -4,7 +4,7 @@
     <TargetFramework>net9.0-windows7.0</TargetFramework>
 	<PlatformName>windows</PlatformName>
 	<PackageId>MvvmNavigationModule</PackageId>
-	<Version>1.1.0</Version>
+	<Version>1.2.0</Version>
 	<Authors>Marco Cigana</Authors>
 	<Company></Company>
 	<Description></Description>
